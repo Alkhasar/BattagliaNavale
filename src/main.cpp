@@ -1,5 +1,6 @@
 // Includes here
 #include <iostream>
+#include "headers/Game.h"
 
 // Namespace used
 using namespace std;
@@ -7,6 +8,8 @@ using namespace std;
 // Main function that will be launched by compiler
 int main(int argc, char const *argv[])
 {
-    /* code */
+    Game::introScreen();
+
+
     return 0;
 }
