@@ -1,25 +1,32 @@
 #ifndef SHIP_H
 #define SHIP_H
 
-#include "BaseElement.h"
+// Include degli header usati
+#include "Grid.h"
 
 class Ship{
-    private:
-        // Ship size
-        int size;
-        
-        // Coordinates of the top-left corner
-        int x;
-        int y;
-
-        // Array pointing to baseElements
-        BaseElement** children;
-
     public:
-        Ship(int, int, int);
-        bool isDestroyed();
-        void addBaseElements(BaseElement*, int);
+        // Costruttore pubblico
+        Ship(int*, int*, int, Grid*);
 
-};
+        // Metodo per verificare se una barca è viva
+        bool isAlive();
+
+        // Metodo per verificare la larghezza della barca
+        int getSize();
+
+        // Metodo per ottenre la coordinata dell' elemento iesimo
+        int* getElement(int);
+
+    private:
+        // Puntatore ad un puntatore, punterà ad un array per le coordinata
+        int** coordinates;
+
+        // Valore della dimensione
+        int size;
+
+        // riferimento alla griglia in cui è piazzata
+        Grid* grid;
+};   
 
 #endif

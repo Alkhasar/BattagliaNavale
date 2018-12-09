@@ -1,44 +1,105 @@
-#include <iostream>
-#include <vector>
 #include "headers/Grid.h"
-#include "headers/BaseElement.h"
 
-using std::vector;
+Grid::Grid()
+{
+    clean(0);
+}
 
-/**
- * Constructor for grid class
- */
-Grid::Grid(int w, int h){
-    // Setting grid size
-    width = w;
-    height = h;
+Grid::~Grid()
+{
+    //dtor
+}
+void Grid::setValue(int x, int y, int value)
+{
+    if(!isOutOfBounds(x, y))
+        grid[y][x] = value;
+}
 
-    // Creating grid
-    grid.resize(height);
-    for(int y = 0; y < height; y++){
-        grid[y].resize(width);
-        for(int x = 0; x < width; x++){
-            grid[y][x] = new BaseElement(x, y);
+void Grid::clean(int f){
+    for(int i = 0; i < 10; i++){
+        for(int j = 0; j < 10; j++){
+            grid[i][j] = f;
         }
     }
 }
 
-// Setting initial instance to NULL
-Grid* Grid::instance = 0;
+int Grid::getValue(int x, int y)
+{
+    if(!isOutOfBounds(x, y))
+        return grid[y][x];
+    return -1;
+}
 
-// Getter for the Grid instance
-Grid* Grid::getInstance(int w, int h){
-    if(instance==0){
-        instance = new Grid(w, h);
+bool Grid::isValue(int x, int y, int value)
+{
+    if(!isOutOfBounds(x, y))
+        return grid[y][x] == value;
+    return false;
+}
+
+bool Grid::isOutOfBounds(int x, int y)
+{
+    if(x >= 0 && x < 10 && y >= 0 && y < 10)
+        return false;
+    return true;
+}
+
+//-1 = outOfBounds o diagonale, 0 = value non trovato, 1 = value trovato
+int Grid::checkBetween(int x1, int y1, int x2, int y2, int value)
+{
+    if(isOutOfBounds(x1, y1) || isOutOfBounds(x2, y2))
+        return -2;
+    if(x1 == x2){
+        for(int i = min(y1, y2); i < max(y1, y2); i++){
+            if(grid[i][x1] == value)
+                return 1;
+        }
+    } else if(y1 == y2) {
+        for(int i = min(x1, x2); i < max(x1, x2); i++){
+            if(grid[y1][i] == value)
+                return 1;
+            
+        }
     } else {
-        std::cout << "WARNING: Grid already initialised!" << std::endl;
+        return -1;
     }
+    return 0;
 }
 
-int Grid::checkCell(int x, int y){
-    grid[y][x]->getValue();
+//true = andata a buon fine
+bool Grid::insertShip(int x1, int y1, int x2, int y2)
+{
+    if(x1 == x2){
+        for(int i = min(y1, y2); i < max(y1, y2); i++){
+                grid[i][x1] = 1;
+        }
+    } else if(y1 == y2) {
+        for(int i = min(x1, x2); i < max(x1, x2); i++){
+                grid[y1][i] = 1;
+        }
+    }
+    return true;
 }
 
-void Grid::setCell(int x, int y, int value){
-    grid[y][x]->setValue(value);
+int Grid::min(int x1, int x2){
+    if(x1>x2){
+        return x2;
+    }
+    return x1;
+}
+
+int Grid::max(int x1, int x2){
+    if(x1<x2){
+        return x2;
+    }
+    return x1;
+}
+
+bool Grid::hit(int x, int y)
+{
+    if(!isValue(x,y,1))
+        return false;
+    else
+        grid[y][x] = 2;
+    return true;
 }

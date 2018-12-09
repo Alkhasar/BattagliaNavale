@@ -1,15 +1,15 @@
-// Includes here
-#include <iostream>
-#include "headers/Game.h"
+// Include di ncurses per chiamare le funzioni di uscita
+#include <ncurses.h>
 
-// Namespace used
-using namespace std;
+// Inclusione della classe gioco
+#include "Game.cpp"
 
-// Main function that will be launched by compiler
 int main(int argc, char const *argv[])
 {
-    Game::introScreen();
+    // Starting the game with the starting screen
+    Game::startingScreen();
 
-
+    endwin();
+    exit(0);
     return 0;
 }
