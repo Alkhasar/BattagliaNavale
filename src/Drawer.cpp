@@ -24,6 +24,13 @@ Drawer::Drawer(){
     noecho();
     console = newwin(0, 0, 0, 0);
 
+    // Impostazione dei colori
+    start_color();
+
+    // Associazione allo slot 1 del colore BLU come foreground
+    // E CIANO come background.
+    init_pair(1, COLOR_BLUE, COLOR_CYAN);
+
     // Constant Data
     int rows = 24;
     int cols = 80;
@@ -49,7 +56,11 @@ void Drawer::update(){
 }
 
 void Drawer::drawBoundaries(chtype horizontal, chtype vertical){
+    // Partenza della colorazione
+    wattron(console, COLOR_PAIR(1));
     box(console, vertical, horizontal);
+    // Chiusura della colorazione
+    wattroff(console, COLOR_PAIR(1));
 }
 
 void Drawer::clearConsole(){

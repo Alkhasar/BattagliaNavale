@@ -6,6 +6,7 @@
 
 int main(int argc, char const *argv[])
 {
+
     // Starting the game with the starting screen
     Game::startingScreen();
 
