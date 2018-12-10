@@ -29,7 +29,7 @@ void Game::startingScreen(){
     // Pulitura della console, visualizzazione del titolo e di
     // una frase
     drawer->clearConsole();
-    drawer->drawTitle("BATTAGLIA NAVALE");
+    drawer->drawTitle("BATTAGLIA NAVALE TCF 2018");
     drawer->drawRules();
     drawer->drawSentence("Premi un tasto per continuare...");
 
@@ -39,16 +39,28 @@ void Game::startingScreen(){
 }
 
 void Game::placingScreen(){
+    // Una schermata che indicha al giocatore 2 di girarsi
+    drawer->clearConsole();   
+    drawer->drawSentence(4,5,"GIOCATORE N.1, il GIOCATORE N.2 si è girato?");
+    drawer->drawSentence("Se sì, premi un tasto per continuare...");
+    drawer->pause();
+    drawer->drawSentence(4,5,"GIOCATORE N.1, sei sicuro?");
+    drawer->drawSentence("Se sì, premi un tasto per continuare...");
+    drawer->pause();
 
-    // DA AGGIUNGERE: Una schermata che indichi al giocatore 2 di girarsi
-
-    // Piazzamento delle navi del giocatore 1, dopo una pulizia della
-    // console
+    // Piazzamento delle navi del giocatore 1, dopo una pulizia della console
     drawer->clearConsole();
     drawer->drawTitle("PIAZZAMENTO NAVI - GIOCATORE N.1");
     ShipPlacer* P1 = new ShipPlacer(player1[0], ships1);
 
-    // DA AGGIUNGERE: Una schermata che indichi al giocatore 1 di girarsi
+    // Una schermata che indicha al giocatore 1 di girarsi
+    drawer->clearConsole();   
+    drawer->drawSentence(4,5,"GIOCATORE N.2, il GIOCATORE N.1 si è girato?");
+    drawer->drawSentence("Se sì, premi un tasto per continuare...");
+    drawer->pause();
+    drawer->drawSentence(4,5,"GIOCATORE N.2, sei sicuro?");
+    drawer->drawSentence("Se sì, premi un tasto per continuare...");
+    drawer->pause();
 
     // Piazzamento delle navi del giocatore 2, dopo una pulizia della
     // console
@@ -56,12 +68,12 @@ void Game::placingScreen(){
     drawer->drawTitle("PIAZZAMENTO NAVI - GIOCATORE N.2");
     ShipPlacer* P2 = new ShipPlacer(player2[0], ships2);  
 
-    // DA AGGIUNGERE: Una schermata che informi che la fase di piazzamento si è conclusa
-
-    // Pausa del gioco
+    // Una schermata che informa che la fase di piazzamento si è conclusa e si passerà al gioco
+    drawer->clearConsole();
+    drawer->drawSentence(4,5,"La fase di posizionamento è finita con successo!!!");
+    drawer->drawSentence("Per cominciare a giocare premi un tasto qualsiasi...");
     drawer->pause();
     playingScreen();
-
 }
 
 void Game::playingScreen(){
@@ -77,7 +89,7 @@ void Game::playingScreen(){
         drawer->clearConsole();
 
         // Disegno del titolo
-        drawer->drawTitle("TURNO DEL GIOCATORE N." + to_string(turn%2));
+        drawer->drawTitle("TURNO DEL GIOCATORE N." + to_string(turn%2+1));
         
         // Disegno della griglia
         if(turn%2 == 0){
@@ -127,13 +139,38 @@ void Game::playingScreen(){
             }
         }
         
-        // DA AGGIUNGERE: Una frase che indichi se è stata colpita una nave o dell'acqua
-
-        // Pausa del gioco
-        drawer->pause();
+        // NON FUNZIONA: Una frase che indica se è stata colpita una nave o dell'acqua
+        if(turn%2 == 0){
+            int value = player1[1].getValue(pos[0], pos[1]);
+            //Debugger per vedere cosa c'è nella griglia
+            //drawer->drawSentence(1,1,to_string(value));
+            if(value == 2 ){
+                drawer->drawSentence(4,19,"Hai colpito una nave!");
+            }
+            if(value == 3){
+                drawer->drawSentence(4,19,"Hai affondato una nave!");
+            }
+            if(value == 0){
+                drawer->drawSentence(4,19,"Hai bombardato dell'innocua acqua...");
+            }
+        }
+        else{
+            int value = player2[1].getValue(pos[0], pos[1]);
+            //Debugger per vedere cosa c'è nella griglia
+            //drawer->drawSentence(1,1,to_string(value));
+            if(value == 2 ){
+                drawer->drawSentence(4,19,"Hai colpito una nave!");
+            }
+            if(value == 3){
+                drawer->drawSentence(4,19,"Hai affondato una nave!");
+            }
+            if(value == 0){
+                drawer->drawSentence(4,19,"Hai bombardato dell'innocua acqua...");
+            }
+        }
 
         // Il giocatore viene informato che si è concluso il turno
-        drawer->drawSentence("Il giocatore " + to_string(turn%2) + " ha concluso il suo turno.");
+        drawer->drawSentence("Il GIOCATORE " + to_string(turn%2+1) + " ha concluso il suo turno.");
         drawer->drawSentence(4, 22, "Premere un tasto per continuare...");
         drawer->pause();
 
@@ -185,5 +222,12 @@ bool Game::lostCondition(){
         c = true;
     }
 
+    //Dice che il gioco è finito
+    if(c==true){
+        drawer->clearConsole();
+        drawer->drawSentence(4, 10, "Il gioco è finito, complimenti hai VINTO!!");
+        drawer->drawSentence(4, 11, "Premere un tasto per chiudere il gioco...");
+        drawer->pause();
+    }
     return c;
 }

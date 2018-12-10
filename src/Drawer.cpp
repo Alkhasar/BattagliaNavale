@@ -127,18 +127,18 @@ string Drawer::drawInteraction(string sentence, string case1, string case2){
 }
 
 void Drawer::drawRules(){
-    drawSentence(4, 5, "BENVENUTO A BATTAGLIA NAVALE");
-    drawSentence(4, 6, "Le regole del gioco sono semplici, ogni giocatore ha a");
-    drawSentence(4, 7, "disposizione: ");
-    drawSentence(4, 9, "    - PORTAREI           Caselle: 6 Quantità: 1");
-    drawSentence(4, 10, "    - CORAZZATA          Caselle: 5 Quantità: 1");
-    drawSentence(4, 11, "    - INCROCIATORE       Caselle: 4 Quantità: 3");
-    drawSentence(4, 12, "    - SOTTOMARINO        Caselle: 3 Quantità: 4");
-    drawSentence(4, 13, "    - CACCIATORPEDINIERE Caselle: 2 Quantità: 3");
-    drawSentence(4, 14, "    - SCIALUPPA          Caselle: 1 Quantità: 1");
-    drawSentence(4, 16, "lo scopo è distruggere tutte le navi dell'avversario.");
-    drawSentence(4, 17, "L'unico accorgimento è che non bisogna guardare mentre");
-    drawSentence(4, 18, "l'avversario posiziona le barche.");
+    drawSentence(4, 5,  "BENVENUTO A BATTAGLIA NAVALE!");
+    drawSentence(4, 6,  "Le regole del gioco sono semplici, ogni giocatore ha a");
+    drawSentence(4, 7,  "disposizione: ");
+    drawSentence(4, 9,  "    - CORAZZATA          Caselle: 5 Quantità: 1");
+    drawSentence(4, 10, "    - INCROCIATORE       Caselle: 4 Quantità: 2");
+    drawSentence(4, 11, "    - SOTTOMARINO        Caselle: 3 Quantità: 2");
+    drawSentence(4, 12, "    - CACCIATORPEDINIERE Caselle: 2 Quantità: 2");
+    drawSentence(4, 13, "    - SCIALUPPA          Caselle: 1 Quantità: 1");
+    drawSentence(4, 14, "NON PREMERE LE FRECCE SE NON RICHIESTO DIREZIONALI, GRAZIE.");
+    drawSentence(4, 15, "Lo scopo è distruggere tutte le navi dell'avversario!");
+    drawSentence(4, 16, "Ci si muove nella griglia con le frecce direzionali.");
+    drawSentence(4, 17, "Per bombardare si preme ENTER.");
 }
 
 void Drawer::drawSentence(string sentence){

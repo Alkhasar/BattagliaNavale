@@ -19,7 +19,7 @@ class ShipPlacer {
     private:
         // Variabili costanti per indicare il numero di navi da piazzare
         const int shipSizes[5]   = {1, 2, 3, 4, 5};
-        const int shipNumbers[5] = {1, 2, 3, 2, 1};
+        const int shipNumbers[5] = {1, 2, 2, 2, 1};
         
         // Puntatori a variabili
         Grid* grid;
