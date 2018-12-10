@@ -20,6 +20,8 @@ class Drawer{
         // Metodo per visuallizare le regole
         void drawRules();
 
+        //Metodo per visualizzare le istruzioni per piazzare le barche
+        void drawRulesPlacer();
         // Metodo per ripulire la console e ridisegnare i bordi
         void clearConsole();
 

@@ -39,33 +39,40 @@ void Game::startingScreen(){
 }
 
 void Game::placingScreen(){
-    // Una schermata che indicha al giocatore 2 di girarsi
+    //Schermata che spiega come posizionare le barche.
+    drawer->clearConsole();
+    drawer->drawTitle("COME POSIZIONARE LE BARCHE");
+    drawer->drawRulesPlacer();
+    drawer->drawSentence("Premi un tasto per continuare...");
+    drawer->pause();
+
+    // Una schermata che indica al giocatore 2 di girarsi
     drawer->clearConsole();   
-    drawer->drawSentence(4,5,"GIOCATORE N.1, il GIOCATORE N.2 si è girato?");
+    drawer->drawSentence(4,5,"GIOCATORE 1, il GIOCATORE 2 si è girato?");
     drawer->drawSentence("Se sì, premi un tasto per continuare...");
     drawer->pause();
-    drawer->drawSentence(4,5,"GIOCATORE N.1, sei sicuro?");
+    drawer->drawSentence(4,5,"GIOCATORE 1, sei sicuro?");
     drawer->drawSentence("Se sì, premi un tasto per continuare...");
     drawer->pause();
 
     // Piazzamento delle navi del giocatore 1, dopo una pulizia della console
     drawer->clearConsole();
-    drawer->drawTitle("PIAZZAMENTO NAVI - GIOCATORE N.1");
+    drawer->drawTitle("PIAZZAMENTO NAVI - GIOCATORE 1");
     ShipPlacer* P1 = new ShipPlacer(player1[0], ships1);
 
     // Una schermata che indicha al giocatore 1 di girarsi
     drawer->clearConsole();   
-    drawer->drawSentence(4,5,"GIOCATORE N.2, il GIOCATORE N.1 si è girato?");
+    drawer->drawSentence(4,5,"GIOCATORE 2, il GIOCATORE 1 si è girato?");
     drawer->drawSentence("Se sì, premi un tasto per continuare...");
     drawer->pause();
-    drawer->drawSentence(4,5,"GIOCATORE N.2, sei sicuro?");
+    drawer->drawSentence(4,5,"GIOCATORE 2, sei sicuro?");
     drawer->drawSentence("Se sì, premi un tasto per continuare...");
     drawer->pause();
 
     // Piazzamento delle navi del giocatore 2, dopo una pulizia della
     // console
     drawer->clearConsole();
-    drawer->drawTitle("PIAZZAMENTO NAVI - GIOCATORE N.2");
+    drawer->drawTitle("PIAZZAMENTO NAVI - GIOCATORE 2");
     ShipPlacer* P2 = new ShipPlacer(player2[0], ships2);  
 
     // Una schermata che informa che la fase di piazzamento si è conclusa e si passerà al gioco
@@ -139,7 +146,7 @@ void Game::playingScreen(){
             }
         }
         
-        // NON FUNZIONA: Una frase che indica se è stata colpita una nave o dell'acqua
+        //Una frase che indica se è stata colpita una nave o dell'acqua
         if(turn%2 == 0){
             int value = player1[1].getValue(pos[0], pos[1]);
             //Debugger per vedere cosa c'è nella griglia

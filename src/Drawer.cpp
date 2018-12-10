@@ -141,6 +141,23 @@ void Drawer::drawRules(){
     drawSentence(4, 17, "Per bombardare si preme ENTER.");
 }
 
+void Drawer::drawRulesPlacer(){
+    drawSentence(4, 5,  "Il gioco farà posizionare le barche dalla più");
+    drawSentence(4, 6,  "piccola alla più grande.");
+    drawSentence(4, 7,  "Il giocatore, muovendo il cursore con le frecce direzionali,");
+    drawSentence(4, 8,  "si dovrà posizionare sulla casella in cui ci sarà la prua");
+    drawSentence(4, 9,  "della nave da piazzare, fatto ciò dovrà confermare premendo ENTER.");
+    drawSentence(4, 10, "Dunque dovrà posizionare il cursore sulla casella");
+    drawSentence(4, 11, "in cui ci sarà la poppa della nave e riconfermare con ENTER");
+    drawSentence(4, 12, "Questo andrà fatto per tutte le navi");
+    drawSentence(4, 13, "Ovviamente per le barche lunghe 1 poppa e prua coincidono, sarà");
+    drawSentence(4, 14, "quindi necessaria una sola azione");
+    drawSentence(4, 15, "Per annullare il posizionamento della barca e quindi scegliere");
+    drawSentence(4, 16, "un'altra casella premere BACKSPACE");
+}
+
+
+
 void Drawer::drawSentence(string sentence){
     wmove(console, 21, 4);
     wclrtoeol(console);
