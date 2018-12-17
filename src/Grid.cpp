@@ -9,12 +9,15 @@ Grid::~Grid()
 {
     //dtor
 }
+
+//Imposta valore della casella di coordinate x,y
 void Grid::setValue(int x, int y, int value)
 {
     if(!isOutOfBounds(x, y))
         grid[y][x] = value;
 }
 
+//Imposta valore f in tutta la grid
 void Grid::clean(int f){
     for(int i = 0; i < 10; i++){
         for(int j = 0; j < 10; j++){
@@ -23,6 +26,7 @@ void Grid::clean(int f){
     }
 }
 
+//Fornisce valore della casella di coordinate x,y
 int Grid::getValue(int x, int y)
 {
     if(!isOutOfBounds(x, y))
@@ -30,6 +34,7 @@ int Grid::getValue(int x, int y)
     return -1;
 }
 
+//Verifica che la casella di coordinate x,y abbia un preciso valore
 bool Grid::isValue(int x, int y, int value)
 {
     if(!isOutOfBounds(x, y))
@@ -37,6 +42,7 @@ bool Grid::isValue(int x, int y, int value)
     return false;
 }
 
+//Verifica che la casella di coordinate inserite appartenga alla griglia (true = fuori dalla grid)
 bool Grid::isOutOfBounds(int x, int y)
 {
     if(x >= 0 && x < 10 && y >= 0 && y < 10)
@@ -44,6 +50,7 @@ bool Grid::isOutOfBounds(int x, int y)
     return true;
 }
 
+//Controlla la presenza di un valore tra due caselle (comprese) di coordinate specificate
 //-1 = outOfBounds o diagonale, 0 = value non trovato, 1 = value trovato
 int Grid::checkBetween(int x1, int y1, int x2, int y2, int value)
 {
@@ -66,6 +73,7 @@ int Grid::checkBetween(int x1, int y1, int x2, int y2, int value)
     return 0;
 }
 
+// Inserisce nave
 //true = andata a buon fine
 bool Grid::insertShip(int x1, int y1, int x2, int y2)
 {
@@ -81,6 +89,7 @@ bool Grid::insertShip(int x1, int y1, int x2, int y2)
     return true;
 }
 
+// Restituisce minimo due valori
 int Grid::min(int x1, int x2){
     if(x1>x2){
         return x2;
@@ -88,6 +97,7 @@ int Grid::min(int x1, int x2){
     return x1;
 }
 
+//Restituisce max di due valori
 int Grid::max(int x1, int x2){
     if(x1<x2){
         return x2;
@@ -95,6 +105,7 @@ int Grid::max(int x1, int x2){
     return x1;
 }
 
+//Modifica valore casella in 2 (hit)
 bool Grid::hit(int x, int y)
 {
     if(!isValue(x,y,1))
