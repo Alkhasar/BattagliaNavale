@@ -30,10 +30,6 @@ class Game{
         static Grid* player1;
         static Grid* player2;
 
-        // Vettori contenenti le navi usate dai due giocatori
-        static vector<Ship*> ships1;
-        static vector<Ship*> ships2;
-
         // Funzione usata per verificare se vi sono le condizione
         // per la sconfitta
         static bool lostCondition();

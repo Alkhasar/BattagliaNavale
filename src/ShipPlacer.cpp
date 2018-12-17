@@ -3,15 +3,13 @@
 
 // Including external lib
 #include "Drawer.cpp"
-#include "Ship.cpp"
 #include <vector>
 
 using std::vector;
 
-ShipPlacer::ShipPlacer(Grid & _grid, vector<Ship*> & _ships){
+ShipPlacer::ShipPlacer(Grid & _grid){
     // Assegnazione dei parametri passati
     grid = &_grid;
-    ships = _ships;
 
     // Assegnazione del disegnatore
     drawer = Drawer::getInstance();
@@ -96,13 +94,6 @@ int* ShipPlacer::placeShip(int size){
                 
                 // Se la nave è stata piazzata con successo disegna le navi sulla griglia
                 if(placed){
-
-                    // NON TOCCARE
-                    // ships.push_back(new Ship(pos1, pos2, size, grid));
-                    // new Ship(new int[2]{0, 0}, new int[2]{0, 0}, 0, grid);
-                    // Disegna nave
-                    
-                    // DA MIGLIORARE CON: if(pos1[0] == pos2[0]) ecc.
                     int dx = pos2[0] - pos1[0];
                     int dy = pos2[1] - pos1[1];
 
@@ -138,7 +129,6 @@ int* ShipPlacer::placeShip(int size){
                 // Else eseguito se la lunghezza della nave è 1
                 grid->setValue(((pos1[0] - 31))/2, pos1[1] - 5, 1);
                 pos2 = pos1;
-                //ships.push_back(new Ship(pos1, pos1, size, grid)); NON TOCCARE
                 done = false;
             }
         };

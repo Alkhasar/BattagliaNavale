@@ -16,11 +16,6 @@ Drawer* Game::drawer = Drawer::getInstance();
 Grid* Game::player1 = new Grid[2]{Grid(), Grid()};
 Grid* Game::player2 = new Grid[2]{Grid(), Grid()};
 
-// Vettori per tenere memoria della navi create
-vector<Ship*> Game::ships1;
-vector<Ship*> Game::ships2;
-
-
 void Game::startingScreen(){
     // Operazioni iniziali
     player1[1].clean(-1);
@@ -58,7 +53,7 @@ void Game::placingScreen(){
     // Piazzamento delle navi del giocatore 1, dopo una pulizia della console
     drawer->clearConsole();
     drawer->drawTitle("PIAZZAMENTO NAVI - GIOCATORE 1");
-    ShipPlacer* P1 = new ShipPlacer(player1[0], ships1);
+    ShipPlacer* P1 = new ShipPlacer(player1[0]);
 
     // Una schermata che indicha al giocatore 1 di girarsi
     drawer->clearConsole();   
@@ -73,7 +68,7 @@ void Game::placingScreen(){
     // console
     drawer->clearConsole();
     drawer->drawTitle("PIAZZAMENTO NAVI - GIOCATORE 2");
-    ShipPlacer* P2 = new ShipPlacer(player2[0], ships2);  
+    ShipPlacer* P2 = new ShipPlacer(player2[0]);  
 
     // Una schermata che informa che la fase di piazzamento si è conclusa e si passerà al gioco
     drawer->clearConsole();
@@ -99,7 +94,7 @@ void Game::playingScreen(){
         drawer->drawTitle("TURNO DEL GIOCATORE N." + to_string(turn%2+1));
         
         // Disegno della griglia
-        if(turn%2 == 0){
+        if(turn%2 == 1){
             drawer->drawGrid(&player1[1]);
         } else {
             drawer->drawGrid(&player2[1]);
@@ -116,38 +111,20 @@ void Game::playingScreen(){
         pos[1] = pos[1] - 5;
 
         // Update della griglia
-        if(turn%2 == 0){
+        if(turn%2 == 1){
             int value = player1[0].getValue(pos[0], pos[1]);
             player1[1].setValue(pos[0], pos[1], value == 1 ? 2 : 0);
             drawer->drawGrid(&player1[1]);
-            if(value == 1){
-                for(int i = 0; i < ships1.size(); i++){
-                    if(!(ships1[i]->isAlive())){
-                        for(int k = 0; k < ships1[i]->getSize(); k++){
-                            int* pos1 = ships1[i]->getElement(k);
-                            player1[1].setValue(pos1[0], pos1[1], 3);
-                        }
-                    }
-                }
-            }
+            
         } else {
             int value = player2[0].getValue(pos[0], pos[1]);
             player2[1].setValue(pos[0], pos[1], value == 1 ? 2 : 0);
             drawer->drawGrid(&player2[1]);
-            if(value == 1){
-                for(int i = 0; i < ships2.size(); i++){
-                    if(!(ships2[i]->isAlive())){
-                        for(int k = 0; k < ships2[i]->getSize(); k++){
-                            int* pos1 = ships2[i]->getElement(k);
-                            player2[1].setValue(pos1[0], pos1[1], 3);
-                        }
-                    }
-                }
-            }
+            
         }
         
         //Una frase che indica se è stata colpita una nave o dell'acqua
-        if(turn%2 == 0){
+        if(turn%2 == 1){
             int value = player1[1].getValue(pos[0], pos[1]);
             //Debugger per vedere cosa c'è nella griglia
             //drawer->drawSentence(1,1,to_string(value));
@@ -189,20 +166,6 @@ void Game::playingScreen(){
 }
 
 bool Game::lostCondition(){
-   /* bool condA = true;
-    bool condB = true;
-    for(int i = 0; i < ships1.size(); i++){
-        if(ships1[i]->isAlive()){
-            condA = false;
-        }
-    }
-    for(int i = 0; i < ships2.size(); i++){
-        if(ships2[i]->isAlive()){
-            condB = false;
-        }
-    }
-
-    return !(condA == condB);*/ // In un mondo ideale questo codice funzionerebbe... ma sono una capra e quindi no!
     bool condA = true;
     bool condB = true;
     bool c = false;
@@ -232,7 +195,12 @@ bool Game::lostCondition(){
     //Dice che il gioco è finito
     if(c==true){
         drawer->clearConsole();
-        drawer->drawSentence(4, 10, "Il gioco è finito, complimenti hai VINTO!!");
+        if(condB == true){
+            drawer->drawSentence(4, 10, "Il gioco è finito, complimenti hai VINTO giocatore 1!!");
+        }
+        else{
+            drawer->drawSentence(4, 10, "Il gioco è finito, complimenti hai VINTO giocatore 2!!");
+        }
         drawer->drawSentence(4, 11, "Premere un tasto per chiudere il gioco...");
         drawer->pause();
     }

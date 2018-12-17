@@ -4,7 +4,6 @@
 
 
 // Include dei file usati
-#include "Ship.h"
 #include "Drawer.h"
 #include <vector>
 
@@ -14,7 +13,7 @@ using std::vector;
 class ShipPlacer {
     public:
         // Costruttore chiamato per iniziare un piazzamento
-        ShipPlacer(Grid&, vector<Ship*>&);
+        ShipPlacer(Grid&);
 
     private:
         // Variabili costanti per indicare il numero di navi da piazzare
@@ -24,9 +23,6 @@ class ShipPlacer {
         // Puntatori a variabili
         Grid* grid;
         Drawer* drawer;
-
-        // Vettore per tenre traccia delle navi
-        vector<Ship*> ships;
 
         // Funzione loop chiamata dal costruttore per piazzare le navi
         void loop();
