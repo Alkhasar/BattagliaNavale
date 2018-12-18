@@ -135,7 +135,7 @@ void Drawer::drawRules(){
     drawSentence(4, 11, "    - SOTTOMARINO        Caselle: 3 Quantità: 2");
     drawSentence(4, 12, "    - CACCIATORPEDINIERE Caselle: 2 Quantità: 2");
     drawSentence(4, 13, "    - SCIALUPPA          Caselle: 1 Quantità: 1");
-    drawSentence(4, 14, "NON PREMERE LE FRECCE SE NON RICHIESTO DIREZIONALI, GRAZIE.");
+    drawSentence(4, 14, "NON PREMERE LE FRECCE DIREZIONALI SE NON RICHIESTO, GRAZIE.");
     drawSentence(4, 15, "Lo scopo è distruggere tutte le navi dell'avversario!");
     drawSentence(4, 16, "Ci si muove nella griglia con le frecce direzionali.");
     drawSentence(4, 17, "Per bombardare si preme ENTER.");
