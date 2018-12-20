@@ -23,6 +23,9 @@ void ShipPlacer::loop(){
     // Loop su ogni nave e piazzamento :: DA MIGLIORARE
     for(int size = 1; size < 6; size++){
         for(int ship = 0; ship < shipNumbers[size - 1]; ship++){
+
+            drawer->drawSentence("Stai posizionando una barca di dimensione: " + to_string(size));
+
             // Viene tenuta traccia della posizione finle della nave
             // per muoverci il cursore appena piazzata
             int* pos = placeShip(size);
